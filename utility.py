@@ -16,7 +16,8 @@ class CurrentPlayingMusic:
         self.is_playing = cp["is_playing"]
         self.status = cp["actions"]["disallows"]
 
-        self.cp = cp
+    def return_to_template(self):
+        return self.artist, self.name, self.image
 
     def print_music(self):
         print("\n",

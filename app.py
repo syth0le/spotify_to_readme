@@ -1,8 +1,10 @@
 import spotipy as spoty
 from spotipy.oauth2 import SpotifyOAuth
 import pprint
+import webbrowser
 
 from config import SpotifyConfig
+from template import template
 from utility import CurrentPlayingMusic
 
 spotify = spoty.Spotify(auth_manager=SpotifyOAuth(scope=SpotifyConfig.SCOPE,
@@ -11,14 +13,25 @@ spotify = spoty.Spotify(auth_manager=SpotifyOAuth(scope=SpotifyConfig.SCOPE,
                                                   redirect_uri=SpotifyConfig.REDIRECT_URI,
                                                   username=SpotifyConfig.USERNAME))
 
+
+def edit_html_template(template, artist, name, image):
+    with open("card.html", "w") as w:
+        DATA = template
+
+        DATA = DATA.replace("@ARTIST", str(artist))
+        DATA = DATA.replace("@SONG", str(name))
+        DATA = DATA.replace("@IMAGE", image)
+
+        w.write(DATA)
+
+
 if __name__ == "__main__":
     current_playing = spotify.current_user_playing_track()
-    current = CurrentPlayingMusic(current_playing).print_music()
-    # print(current_playing)
-    # print('currently_playing_type', smt['currently_playing_type'])
-    # print('actions', smt['actions'])
-    # print('is_playing', smt['is_playing'])
-    # print('context', smt['context'])
-    # print('timestamp', smt['timestamp'])
-    # print(current_playing['item'].keys())
-    # print(current_playing)
+    current_cls = CurrentPlayingMusic(current_playing)
+    current_cls.print_music()
+
+    artist, name, image = current_cls.return_to_template()
+
+    edit_html_template(template, artist, name, image)
+
+    webbrowser.open('card.html')
