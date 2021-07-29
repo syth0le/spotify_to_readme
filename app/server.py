@@ -5,7 +5,7 @@ from app.html_generation import HTML
 
 app = Flask(__name__)
 
-FILE = "card.html"
+FILE = "card.html.j2"
 
 
 @app.route("/")
