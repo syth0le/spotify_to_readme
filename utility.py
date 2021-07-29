@@ -1,4 +1,5 @@
 class CurrentPlayingMusic:
+
     def __init__(self, cp):
         self.name = cp["item"]["name"]
         self.artist = ', '.join([artist["name"] for artist in cp["item"]["artists"]])
@@ -17,7 +18,7 @@ class CurrentPlayingMusic:
         self.status = cp["actions"]["disallows"]
 
     def return_to_template(self):
-        return self.artist, self.name, self.image
+        return self.artist, self.name, self.image, self.song_url, self.is_playing
 
     def print_music(self):
         print("\n",

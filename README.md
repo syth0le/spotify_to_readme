@@ -1,1 +1,1 @@
-# spotify_to_vk_status
+# Integrate your spotify to README.md
