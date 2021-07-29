@@ -1,17 +1,9 @@
-from utility import CurrentPlayingMusic
-"""
-        <a href="@HREF" target="_BLANK">
-            <center>
-              <img src="@SRC" width="300" height="300" class="cover" />
-            </center>
-        </a>
-        """
+from app.utility import CurrentPlayingMusic
 
 
 class HTML:
 
     def __init__(self, current_music: CurrentPlayingMusic):
-        # self.template = template  # maybe file???
         self._bars = 75
         self._song_max = 27
         self._artist_max = 35
