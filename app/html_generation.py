@@ -31,8 +31,7 @@ class HTML:
         return IMAGE_TEMPLATE
 
     def _gen_song_title(self):
-        TITLE_TEMPLATE = """<div class="song">{}</div><div class="artist">{}</div>"""
-        if len(self.current_music.name) > self._song_max and self.current_music.is_playing:
+        if len(self.current_music.name) > self._song_max:
             song_template = """<marquee behavior="scroll" direction="left">{}</marquee>"""\
                 .format(self.current_music.name)
         else:
@@ -43,16 +42,17 @@ class HTML:
         else:
             artist_template = self.current_music.artist
 
-        return TITLE_TEMPLATE.format(song_template, artist_template)
+        return song_template, artist_template
 
     def gen_html(self):
+        song_title, artist_name = self._gen_song_title()
         rendered_data = {
             "bars": self._gen_div_bar(),
             "status": self._gen_status_bar(),
             "image": self._gen_image(),
             "title": self._gen_song_title(),
-            # "title_text": title_text,
-            # "artist_name": artist_name,
+            "song_title": song_title,
+            "artist_name": artist_name,
         }
         return rendered_data
 
