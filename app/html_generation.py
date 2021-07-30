@@ -22,11 +22,11 @@ class HTML:
         IMAGE_TEMPLATE = """
         <a href="{}" target="_BLANK">
             <center>
-              <img src="{}" width="300" height="300" class="cover" />
+              <img src="data:image/png;base64, {}" width="300" height="300" class="cover" />
             </center>
         </a>""".format(
             self.current_music.song_url,
-            self.current_music.image
+            self.current_music.load_image_b64()
         )
         return IMAGE_TEMPLATE
 

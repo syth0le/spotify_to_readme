@@ -1,3 +1,8 @@
+from base64 import b64encode
+
+import requests
+
+
 class CurrentPlayingMusic:
 
     def __init__(self, cp):
@@ -16,6 +21,10 @@ class CurrentPlayingMusic:
             self.playlist_url = self.song_url
         self.is_playing = cp["is_playing"]
         self.status = cp["actions"]["disallows"]
+
+    def load_image_b64(self):
+        response = requests.get(self.image)
+        return b64encode(response.content).decode("ascii")
 
     def return_to_template(self):
         return self.artist, self.name, self.image, self.song_url, self.is_playing
