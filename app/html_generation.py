@@ -56,4 +56,16 @@ class HTML:
         }
         return rendered_data
 
+    def gen_html_cache(self):
+        song_title, artist_name = self._gen_song_title()
+        cache_rendered_data = {
+            "bars": "",
+            "status": "Last song played on",
+            "image": self._gen_image(),
+            "title": self._gen_song_title(),
+            "song_title": song_title,
+            "artist_name": artist_name,
+        }
+        return cache_rendered_data
+
 
