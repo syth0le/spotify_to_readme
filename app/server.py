@@ -2,14 +2,12 @@ from flask import Flask, render_template, Response
 
 from app.app import SpotifyMiddleware, auth_manager
 from app.html_generation import HTML
-from app.utility import CurrentPlayingMusic
 
 app = Flask(__name__)
 spotify = SpotifyMiddleware(auth_manager=auth_manager)
 
 FILE = "card.html.j2"
-
-cahce_current_music: CurrentPlayingMusic
+CACHE_FILE = "temp_file.html.j2"
 
 
 @app.route("/")
@@ -23,7 +21,7 @@ def get_song_card():
             w.write(render_template(FILE, **cache_rendered_data))
         template = render_template(FILE, **rendered_data)
     except TypeError:
-        template = render_template("temp_file.html.j2")
+        template = render_template(CACHE_FILE)
     response = Response(template, mimetype="image/svg+xml")
     response.headers["Cache-Control"] = "s-maxage=1"
     return response
