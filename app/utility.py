@@ -1,4 +1,5 @@
 from base64 import b64encode
+from typing import Tuple
 
 import requests
 
@@ -22,14 +23,14 @@ class CurrentPlayingMusic:
         self.is_playing = cp["is_playing"]
         self.status = cp["actions"]["disallows"]
 
-    def load_image_b64(self):
+    def load_image_b64(self) -> str:
         response = requests.get(self.image)
         return b64encode(response.content).decode("ascii")
 
-    def return_to_template(self):
+    def return_to_template(self) -> Tuple[str, ..., bool]:
         return self.artist, self.name, self.image, self.song_url, self.is_playing
 
-    def print_music(self):
+    def print_music(self) -> str:
         print("\n",
               self.name, "\n",
               self.artist, "\n",
