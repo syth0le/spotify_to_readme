@@ -17,7 +17,7 @@ def get_song_card():
         generator = HTML(current_music)
         rendered_data = generator.gen_html()
         cache_rendered_data = generator.gen_html_cache()
-        with open("app/templates/temp_file.html.j2", "w") as w:
+        with open("app/templates/temp_file.html.j2", "w", encoding='utf-8') as w:
             w.write(render_template(FILE, **cache_rendered_data))
         template = render_template(FILE, **rendered_data)
     except TypeError:
